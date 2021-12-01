@@ -18,8 +18,8 @@ public class DepthMeasurements {
     }
 
     public boolean currentlyGoingDeeper() {
-        Integer previous = measurements.get(max(0, measurements.size() - 1));
-        Integer current = measurements.get(measurements.size());
+        Integer previous = measurements.get(max(0, measurements.size() - 2));
+        Integer current = measurements.get(measurements.size() - 1);
         return isBigger(previous, current);
 
     }

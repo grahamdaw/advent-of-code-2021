@@ -3,9 +3,7 @@ package com.grahamdaw;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.max;
-
-public class DepthMeasurements {
+public class Depth {
 
     private final List<Integer> measurements = new ArrayList<>();
     private int timesDeeper = 0;

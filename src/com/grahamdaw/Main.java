@@ -9,10 +9,11 @@ import java.util.stream.Stream;
 public class Main {
 
     // The way we are selecting the solution for the day until I have time to make a better way
-    static Integer day = 2;
+    static Integer day = 3;
     // Let's just consider the file is here
     static String depthReadings = "data/depth-readings.txt";
     static String navReadings = "data/nav-data.txt";
+    static String diagReadings = "data/diagnostics.txt";
 
 
     public static void main(String[] args) {
@@ -29,6 +30,13 @@ public class Main {
                     Navigation nav = new Navigation();
                     getFileStream(navReadings).forEach(nav::addMovementCommand);
                     System.out.println("Our location (for the purposes of the challenge) is " + nav.getLocation());
+                }
+                case 3 -> {
+                    System.out.println("~~~ Day 3 solution ~~~");
+                    Diagnostics diagnostics = new Diagnostics();
+                    getFileStream(diagReadings).forEach(diagnostics::addReading);
+                    System.out.println("Power consumption is " + diagnostics.calculatePowerConsumption());
+                    System.out.println("Life support rating is " + diagnostics.calculateLifeSupport());
                 }
                 default -> System.out.println("No solution for day " + day + " yet!");
             }

@@ -14,14 +14,15 @@ import java.util.stream.Stream;
 public class Main {
 
     // The way we are selecting the solution for the day until I have time to make a better way
-    static Integer day = 4;
+    static Integer day = 5;
     // Let's just consider the file is here
-    static String depthReadings = "data/depth-readings.txt";
-    static String navReadings = "data/nav-data.txt";
-    static String diagReadings = "data/diagnostics.txt";
-    static String bingoStream = "data/bingo-stream.txt";
-    static String bingoCards = "data/bingo-cards.txt";
-
+    static String basePath = "src/main/resources/";
+    static String depthReadings = basePath + "depth-readings.txt";
+    static String navReadings = basePath + "nav-data.txt";
+    static String diagReadings = basePath + "diagnostics.txt";
+    static String bingoStream = basePath + "bingo-stream.txt";
+    static String bingoCards = basePath + "bigo-cards.txt";
+    static String topology = basePath + "topo.txt";
 
     public static void main(String[] args) {
         try{
@@ -90,6 +91,17 @@ public class Main {
                     }
                     // Get winner & score
                     System.out.println("The last card scored " + bingo.lastCardScore(currentNumber));
+                }
+                case 5 -> {
+                    System.out.println("~~~ Day 5 solution ~~~");
+                    Topology topo = new Topology();
+                    getFileStream(topology).forEach((line) -> {
+                        String[] coords = line.split("\\s+->\\s+");
+                        topo.overlayLine(Topology.stringToCoords(coords[0]), Topology.stringToCoords(coords[1]));
+                    });
+                    // topo.printTopology();
+                    // 117 < peaks = 4728 > 12939 (this is all points I think)
+                    System.out.println("Number of peaks " + topo.getPeaks());
                 }
                 default -> System.out.println("No solution for day " + day + " yet!");
             }

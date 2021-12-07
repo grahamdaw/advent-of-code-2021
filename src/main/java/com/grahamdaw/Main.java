@@ -1,15 +1,13 @@
 package com.grahamdaw;
 
-
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import static com.grahamdaw.Utils.*;
 
 public class Main {
 
@@ -24,6 +22,7 @@ public class Main {
     static String bingoCards = basePath + "bigo-cards.txt";
     static String topology = basePath + "topo.txt";
     static String lanternFish = basePath + "lantern-fish.txt";
+    static String crabSubs = basePath + "crab-subs-test.txt";
 
     public static void main(String[] args) {
         try{
@@ -105,8 +104,7 @@ public class Main {
                 case 6 -> {
                     System.out.println("~~~ Day 6 solution ~~~");
                     int daysToRun = 256;
-                    String startingFishCSV = getFileAsString(lanternFish);
-                    List<Integer> startingFish = Arrays.asList(startingFishCSV.split(",")).stream().map(Integer::parseInt).collect(Collectors.toList());
+                    List<Integer> startingFish = csvStringToList(getFileAsString(lanternFish));
                     FishBreedingProgramV2 fbp = new FishBreedingProgramV2(startingFish);
 
                     while(fbp.getElapsedDays() < daysToRun) {
@@ -114,19 +112,16 @@ public class Main {
                         fbp.printStatus();
                     }
                 }
+                case 7 -> {
+                    System.out.println("~~~ Day 7 solution ~~~");
+                    List<Integer> crabSubPositions = csvStringToList(getFileAsString(crabSubs));
+                }
+
                 default -> System.out.println("No solution for day " + day + " yet!");
             }
         } catch (Exception e) {
             System.err.println("Well that didn't work...");
             e.printStackTrace();
         }
-    }
-
-    private static Stream<String> getFileStream(String file) throws IOException {
-        return Files.lines(Paths.get(file));
-    }
-
-    private static String getFileAsString(String file) throws IOException {
-        return Files.readString(Paths.get(file));
     }
 }

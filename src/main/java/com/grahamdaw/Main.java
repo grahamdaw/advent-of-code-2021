@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 public class Main {
 
     // The way we are selecting the solution for the day until I have time to make a better way
-    static Integer day = 5;
-    // Let's just consider the file is here
+    static Integer day = 6;
+    // Let's just consider the file is here in case we need to reused them anywhere
     static String basePath = "src/main/resources/";
     static String depthReadings = basePath + "depth-readings.txt";
     static String navReadings = basePath + "nav-data.txt";
@@ -23,6 +23,7 @@ public class Main {
     static String bingoStream = basePath + "bingo-stream.txt";
     static String bingoCards = basePath + "bigo-cards.txt";
     static String topology = basePath + "topo.txt";
+    static String lanternFish = basePath + "lantern-fish.txt";
 
     public static void main(String[] args) {
         try{
@@ -99,9 +100,19 @@ public class Main {
                         String[] coords = line.split("\\s+->\\s+");
                         topo.overlayLine(Topology.stringToCoords(coords[0]), Topology.stringToCoords(coords[1]));
                     });
-                    // topo.printTopology();
-                    // 117 < peaks = 4728 > 12939 (this is all points I think)
                     System.out.println("Number of peaks " + topo.getPeaks());
+                }
+                case 6 -> {
+                    System.out.println("~~~ Day 6 solution ~~~");
+                    int daysToRun = 256;
+                    String startingFishCSV = getFileAsString(lanternFish);
+                    List<Integer> startingFish = Arrays.asList(startingFishCSV.split(",")).stream().map(Integer::parseInt).collect(Collectors.toList());
+                    FishBreedingProgramV2 fbp = new FishBreedingProgramV2(startingFish);
+
+                    while(fbp.getElapsedDays() < daysToRun) {
+                        fbp.nextDay();
+                        fbp.printStatus();
+                    }
                 }
                 default -> System.out.println("No solution for day " + day + " yet!");
             }
@@ -113,5 +124,9 @@ public class Main {
 
     private static Stream<String> getFileStream(String file) throws IOException {
         return Files.lines(Paths.get(file));
+    }
+
+    private static String getFileAsString(String file) throws IOException {
+        return Files.readString(Paths.get(file));
     }
 }

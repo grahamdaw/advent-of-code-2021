@@ -44,4 +44,16 @@ public class Utils {
         }
         return sum;
     }
+
+    public static String sortStringChars(String str)
+    {
+        char chars[] = str.toCharArray();
+        Arrays.sort(chars);
+        return new String(chars);
+    }
+
+    public static String integerListToString(List<Integer> list) {
+        return list.stream().map(String::valueOf)
+                .collect(Collectors.joining(""));
+    }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public class FishBreedingProgramV2 {
     // New approach as v1 breaks with large number of fish
     // Keep track of batches of fish by day, rather than the individual fish
-    private List<BigInteger> fish = new ArrayList<BigInteger>(Collections.nCopies(9, new BigInteger("0")));
+    private List<BigInteger> fish = new ArrayList<>(Collections.nCopies(9, new BigInteger("0")));
     private int elapsedDays = 0;
 
     public FishBreedingProgramV2(List<Integer> startingFish) {

@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static com.grahamdaw.Utils.*;
@@ -12,7 +13,7 @@ import static com.grahamdaw.Utils.*;
 public class Main {
 
     // The way we are selecting the solution for the day until I have time to make a better way
-    static Integer day = 7;
+    static Integer day = 8;
     // Let's just consider the file is here in case we need to reused them anywhere
     static String basePath = "src/main/resources/";
     static String depthReadings = basePath + "depth-readings.txt";
@@ -23,6 +24,7 @@ public class Main {
     static String topology = basePath + "topo.txt";
     static String lanternFish = basePath + "lantern-fish.txt";
     static String crabSubs = basePath + "crab-subs.txt";
+    static String numberDisplay = basePath + "number-display.txt";
 
     public static void main(String[] args) {
         try{
@@ -118,6 +120,20 @@ public class Main {
                     CrabSubOptimizer cso = new CrabSubOptimizer(crabSubPositions);
                     System.out.println("Answer part 1: " + cso.moveBruteForcePart1());
                     System.out.println("Answer part 2: " + cso.moveBruteForcePart2());
+                }
+                case 8 -> {
+                    System.out.println("~~~ Day 8 solution ~~~");
+                    List<Integer> rows = new ArrayList<>();
+                    getFileStream(numberDisplay).forEach((line) -> {
+                        String[] parsed = Pattern.compile("\\s+\\|\\s+").split(line);
+                        rows.add(NumberDecoder.decodeNumbers(parsed[0], parsed[1]));
+                    });
+                    // Answer part 1 removed as part 2 it changed the return type of decodeNumbers
+                    Integer total = 0;
+                    for(Integer num: rows) {
+                        total += num;
+                    }
+                    System.out.println("Answer part 2: " + total);
                 }
 
                 default -> System.out.println("No solution for day " + day + " yet!");

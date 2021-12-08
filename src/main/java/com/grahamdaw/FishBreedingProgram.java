@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FishBreedingProgram {
-    private List<Integer> fish = new ArrayList<Integer>();
+    private List<Integer> fish;
     private int elapsedDays = 0;
 
     public FishBreedingProgram(List<Integer> startingFish) {
@@ -12,7 +12,7 @@ public class FishBreedingProgram {
     }
 
     public void nextDay() {
-        List<Integer> newFish = new ArrayList<Integer>();
+        List<Integer> newFish = new ArrayList<>();
         for (int i = 0; i < fish.size(); i++) {
             Integer age = fish.get(i);
             if (age.intValue() == 0) {

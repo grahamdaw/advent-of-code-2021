@@ -12,7 +12,7 @@ import static com.grahamdaw.Utils.*;
 public class Main {
 
     // The way we are selecting the solution for the day until I have time to make a better way
-    static Integer day = 6;
+    static Integer day = 7;
     // Let's just consider the file is here in case we need to reused them anywhere
     static String basePath = "src/main/resources/";
     static String depthReadings = basePath + "depth-readings.txt";
@@ -22,7 +22,7 @@ public class Main {
     static String bingoCards = basePath + "bigo-cards.txt";
     static String topology = basePath + "topo.txt";
     static String lanternFish = basePath + "lantern-fish.txt";
-    static String crabSubs = basePath + "crab-subs-test.txt";
+    static String crabSubs = basePath + "crab-subs.txt";
 
     public static void main(String[] args) {
         try{
@@ -115,6 +115,9 @@ public class Main {
                 case 7 -> {
                     System.out.println("~~~ Day 7 solution ~~~");
                     List<Integer> crabSubPositions = csvStringToList(getFileAsString(crabSubs));
+                    CrabSubOptimizer cso = new CrabSubOptimizer(crabSubPositions);
+                    System.out.println("Answer part 1: " + cso.moveBruteForcePart1());
+                    System.out.println("Answer part 2: " + cso.moveBruteForcePart2());
                 }
 
                 default -> System.out.println("No solution for day " + day + " yet!");

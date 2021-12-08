@@ -20,4 +20,28 @@ public class Utils {
     public static List<Integer> csvStringToList(String csv) {
         return Arrays.asList(csv.split(",")).stream().map(Integer::parseInt).collect(Collectors.toList());
     }
+
+    public static Integer sumIntegerList(List<Integer> list) {
+        return list.stream().mapToInt(Integer::intValue).sum();
+    }
+
+    public static Double stdDevIntegerList(List<Integer> list) {
+        Integer sum = sumIntegerList(list);
+        Double mean = Double.valueOf(sum) / list.size();
+
+        Double totalDeviation = Double.valueOf(0);
+        for (Integer value: list) {
+            totalDeviation += Math.pow((value.doubleValue() - mean), 2);
+        }
+
+        return Math.sqrt(totalDeviation / list.size());
+    }
+
+    public static Integer calcSumOfTriangleNumberBecauseIDontKnowWhatItsCalled(Integer num) {
+        Integer sum = 0;
+        for(Integer i = 0; i <= num; i++) {
+            sum += i;
+        }
+        return sum;
+    }
 }

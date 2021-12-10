@@ -13,7 +13,7 @@ import static com.grahamdaw.Utils.*;
 public class Main {
 
     // The way we are selecting the solution for the day until I have time to make a better way
-    static Integer day = 8;
+    static Integer day = 9;
     // Let's just consider the file is here in case we need to reused them anywhere
     static String basePath = "src/main/resources/";
     static String depthReadings = basePath + "depth-readings.txt";
@@ -25,6 +25,7 @@ public class Main {
     static String lanternFish = basePath + "lantern-fish.txt";
     static String crabSubs = basePath + "crab-subs.txt";
     static String numberDisplay = basePath + "number-display.txt";
+    static String heightMap = basePath + "heightmap.txt";
 
     public static void main(String[] args) {
         try{
@@ -134,6 +135,14 @@ public class Main {
                         total += num;
                     }
                     System.out.println("Answer part 2: " + total);
+                }
+                case 9 -> {
+                    System.out.println("~~~ Day 9 solution ~~~");
+                    CaveMapper cm = new CaveMapper();
+                    getFileStream(heightMap).forEach((line) -> cm.parseAndAddRow(line));
+                    cm.printMap();
+                    System.out.println("Answer part 1: " + cm.calculateTotalRiskLevel());
+                    System.out.println("Answer part 2: " + cm.findBasins());
                 }
 
                 default -> System.out.println("No solution for day " + day + " yet!");

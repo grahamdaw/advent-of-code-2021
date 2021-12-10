@@ -20,6 +20,9 @@ public class Utils {
     public static List<Integer> csvStringToList(String csv) {
         return Arrays.asList(csv.split(",")).stream().map(Integer::parseInt).collect(Collectors.toList());
     }
+    public static List<Integer> stringOfIntegersToList(String str) {
+        return Arrays.asList(str.split("")).stream().map(Integer::parseInt).collect(Collectors.toList());
+    }
 
     public static Integer sumIntegerList(List<Integer> list) {
         return list.stream().mapToInt(Integer::intValue).sum();

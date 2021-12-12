@@ -1,5 +1,7 @@
 package com.grahamdaw;
 
+import com.grahamdaw.utils.Matrix;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -104,24 +106,4 @@ public class CaveMapper {
 }
 
 
-class Matrix {
-    private List<List<Integer>> matrix = new ArrayList<>();
 
-    public void addRow(List<Integer> list) {
-        matrix.add(list);
-    }
-
-    public Integer getCoords(int x, int y) {
-        try {
-            return matrix.get(y).get(x);
-        } catch (IndexOutOfBoundsException e) {
-            return null;
-        }
-    }
-
-    public void print() {
-        for (List<Integer> row: matrix) {
-            System.out.println(row.stream().map((i) -> Integer.toString(i)).collect(Collectors.joining(" ")));
-        }
-    }
-}

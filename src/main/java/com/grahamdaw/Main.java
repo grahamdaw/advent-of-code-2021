@@ -13,7 +13,7 @@ import static com.grahamdaw.Utils.*;
 public class Main {
 
     // The way we are selecting the solution for the day until I have time to make a better way
-    static Integer day = 10;
+    static Integer day = 11;
     // Let's just consider the file is here in case we need to reused them anywhere
     static String basePath = "src/main/resources/";
     static String depthReadings = basePath + "depth-readings.txt";
@@ -27,6 +27,7 @@ public class Main {
     static String numberDisplay = basePath + "number-display.txt";
     static String heightMap = basePath + "heightmap.txt";
     static String navErrors = basePath + "nav-system-errors.txt";
+    static String octopuses = basePath + "dumbo-octo.txt";
 
     public static void main(String[] args) {
         try{
@@ -153,6 +154,16 @@ public class Main {
                     System.out.println("Answer part 1: " + nav.syntaxErrorScore());
                     System.out.println("Answer part 2: " + nav.autocompleteScore());
                 }
+                case 11 -> {
+                    System.out.println("~~~ Day 11 solution ~~~");
+                    OctopusSimulator sim = new OctopusSimulator();
+                    getFileStream(octopuses).forEach((line) -> sim.parseAndAddRow(line));
+                    System.out.println("Answer part 1: " + sim.flashesInSteps(100));
+                    OctopusSimulator sim2 = new OctopusSimulator();
+                    getFileStream(octopuses).forEach((line) -> sim2.parseAndAddRow(line));
+                    System.out.println("Answer part 2: " + sim2.findFirstSynchornizedFlash());
+                }
+
 
                 default -> System.out.println("No solution for day " + day + " yet!");
             }

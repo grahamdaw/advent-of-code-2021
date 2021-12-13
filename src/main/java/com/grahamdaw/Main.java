@@ -13,7 +13,7 @@ import static com.grahamdaw.Utils.*;
 public class Main {
 
     // The way we are selecting the solution for the day until I have time to make a better way
-    static Integer day = 11;
+    static Integer day = 12;
     // Let's just consider the file is here in case we need to reused them anywhere
     static String basePath = "src/main/resources/";
     static String depthReadings = basePath + "depth-readings.txt";
@@ -28,6 +28,7 @@ public class Main {
     static String heightMap = basePath + "heightmap.txt";
     static String navErrors = basePath + "nav-system-errors.txt";
     static String octopuses = basePath + "dumbo-octo.txt";
+    static String caveSystem = basePath + "cave-system.txt";
 
     public static void main(String[] args) {
         try{
@@ -163,8 +164,15 @@ public class Main {
                     getFileStream(octopuses).forEach((line) -> sim2.parseAndAddRow(line));
                     System.out.println("Answer part 2: " + sim2.findFirstSynchornizedFlash());
                 }
-
-
+                case 12 -> {
+                    System.out.println("~~~ Day 12 solution ~~~");
+                    CaveNavigator nav = new CaveNavigator();
+                    getFileStream(caveSystem).forEach((line) -> {
+                        String[] conn = line.split("-");
+                        nav.addCaveConnection(conn[0], conn[1]);
+                    });
+                    System.out.println("Answer: " + nav.calculateRoutes());
+                }
                 default -> System.out.println("No solution for day " + day + " yet!");
             }
         } catch (Exception e) {
